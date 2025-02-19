@@ -1,0 +1,377 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+/* Custom cursor and selection */
+* {
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/svg" width="20" height="20" style="font-size: 20px"><text y="18">💠</text></svg>'), auto;
+}
+
+::selection {
+  background: #4dd0ff;
+  color: #000;
+}
+
+.App {
+  position: relative;
+  min-height: 100vh;
+  background-color: #0a1929;
+  background-image: 
+    linear-gradient(45deg, #0b3c7d 25%, transparent 25%),
+    linear-gradient(-45deg, #0b3c7d 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #0b3c7d 75%),
+    linear-gradient(-45deg, transparent 75%, #0b3c7d 75%);
+  background-size: 20px 20px;
+  background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  font-family: 'Verdana', sans-serif;
+}
+
+.main-content {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  position: relative;
+  color: #4dd0ff;
+  font-size: 3.5rem;
+  font-family: 'Press Start 2P', cursive;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 40px;
+}
+
+.image-container {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.image-wrapper {
+  width: 100%;
+  aspect-ratio: 16/9;
+  position: relative;
+  background: rgba(10, 25, 41, 0.8);
+  border-radius: 15px;
+  border: 2px solid #4dd0ff;
+  box-shadow: inset 0 0 15px rgba(77, 208, 255, 0.3);
+  overflow: visible !important;
+  margin-bottom: 24px;
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-wrapper img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 95%;
+  max-height: 95%;
+  object-fit: contain;
+  border-radius: 8px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.image-wrapper img[src] {
+  opacity: 1;
+}
+
+.button-container {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 0;
+}
+
+button {
+  background: linear-gradient(to bottom, #4dd0ff, #0b3c7d);
+  color: white;
+  border: 2px solid #4dd0ff;
+  padding: 12px 28px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+button:hover {
+  background: linear-gradient(to bottom, #5ee1ff, #0c4494);
+  transform: translateY(-2px);
+  box-shadow: 0 0 15px rgba(77, 208, 255, 0.4);
+}
+
+button:active {
+  transform: translateY(0);
+  background: linear-gradient(to bottom, #0b3c7d, #4dd0ff);
+}
+
+button::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: rgba(255, 255, 255, 0.1);
+  transform: rotate(45deg);
+  animation: buttonShine 2s infinite linear;
+}
+
+@keyframes titlePulse {
+  0% { text-shadow: 0 0 10px #4dd0ff, 0 0 20px #4dd0ff, 0 0 30px #4dd0ff; }
+  50% { text-shadow: 0 0 15px #4dd0ff, 0 0 25px #4dd0ff, 0 0 35px #4dd0ff; }
+  100% { text-shadow: 0 0 10px #4dd0ff, 0 0 20px #4dd0ff, 0 0 30px #4dd0ff; }
+}
+
+@keyframes containerGlow {
+  0% { box-shadow: 0 0 20px rgba(77, 208, 255, 0.2); }
+  50% { box-shadow: 0 0 30px rgba(77, 208, 255, 0.4); }
+  100% { box-shadow: 0 0 20px rgba(77, 208, 255, 0.2); }
+}
+
+@keyframes buttonShine {
+  from { transform: translateX(-100%) rotate(45deg); }
+  to { transform: translateX(100%) rotate(45deg); }
+}
+
+/* Winamp-inspired Music Player */
+.music-player {
+  width: 25%;
+  max-width: 350px;
+  height: fit-content;
+  margin-top: 120px;
+}
+
+.player-header {
+  background: linear-gradient(to right, #000091, #4dd0ff);
+  color: white;
+  padding: 5px 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-bottom: 1px solid #4dd0ff;
+}
+
+.player-visualization {
+  background: #000;
+  height: 60px;
+  margin: 4px;
+  border: 1px solid #4dd0ff;
+  box-shadow: inset 0 0 10px rgba(77, 208, 255, 0.3);
+  animation: visualizerPulse 1s infinite;
+}
+
+.player-info {
+  background: #000;
+  color: #4dd0ff;
+  font-family: 'Press Start 2P', monospace;
+  padding: 8px;
+  margin: 4px;
+  font-size: 10px;
+  border: 1px solid #4dd0ff;
+  text-shadow: 0 0 5px #4dd0ff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  animation: none;
+}
+
+.player-slider {
+  width: calc(100% - 8px);
+  height: 8px;
+  margin: 4px;
+  background: #000;
+  border: 1px solid #4dd0ff;
+  -webkit-appearance: none;
+  border-radius: 4px;
+}
+
+.player-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 15px;
+  height: 15px;
+  background: #4dd0ff;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 10px #4dd0ff;
+}
+
+.player-controls {
+  background: linear-gradient(135deg, #1a1a1a, #333);
+  padding: 8px;
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  border-top: 1px solid #4dd0ff;
+}
+
+.player-button {
+  background: linear-gradient(135deg, #4dd0ff, #0b3c7d);
+  color: white;
+  border: 1px solid #4dd0ff;
+  padding: 5px 12px;
+  font-size: 11px;
+  cursor: pointer;
+  text-shadow: 0 0 5px rgba(77, 208, 255, 0.8);
+  transition: all 0.2s ease;
+  box-shadow: 0 0 10px rgba(77, 208, 255, 0.2);
+}
+
+/* Animations */
+@keyframes visualizerPulse {
+  0% { opacity: 0.8; }
+  50% { opacity: 1; }
+  100% { opacity: 0.8; }
+}
+
+@keyframes textScroll {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+/* Mouse trail effect */
+.trail {
+  position: fixed;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #4dd0ff;
+  pointer-events: none;
+  animation: trail 0.5s linear forwards;
+}
+
+@keyframes trail {
+  0% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(0.1); }
+}
+
+/* Media Queries */
+@media (max-width: 1024px) {
+  .App {
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .main-content {
+    width: 100%;
+  }
+
+  .music-player {
+    width: 100%;
+    max-width: 100%;
+    margin-top: 20px;
+  }
+
+  .title {
+    font-size: 1.5rem;
+    padding: 10px 20px;
+  }
+}
+
+.image-counter {
+  color: #4dd0ff;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 1rem;
+  text-align: center;
+  margin-top: 10px;
+  text-shadow: 0 0 5px #4dd0ff;
+}
+
+.loading, .error {
+  color: #4dd0ff;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 1.2rem;
+  text-align: center;
+  margin-top: 20px;
+  text-shadow: 0 0 5px #4dd0ff;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  border: 2px solid #4dd0ff;
+}
+
+.error {
+  color: #ff4d4d;
+  border-color: #ff4d4d;
+  text-shadow: 0 0 5px #ff4d4d;
+}
+
+.like-button {
+  background: rgba(0, 0, 0, 0.5);
+  border: 2px solid #4dd0ff;
+  color: #4dd0ff;
+  padding: 5px 15px;
+  border-radius: 20px;
+  margin-left: 15px;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.like-button.liked {
+  border-color: #ff4d4d;
+  color: #ff4d4d;
+  cursor: not-allowed;
+}
+
+.like-button:hover:not(.liked) {
+  background: rgba(77, 208, 255, 0.2);
+}
+
+/* Add after the existing imports at the top */
+@keyframes sparkle {
+  0%, 100% { opacity: 0; transform: scale(0.5); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+.kuromi-corner {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  z-index: 1;
+  filter: drop-shadow(0 0 5px #ff66ff);
+}
+
+.kuromi-top-right {
+  top: 20%;
+  right: 30%;
+  transform: rotate(15deg);
+}
+
+.kuromi-bottom-left {
+  bottom: 20%;
+  left: 3%;
+  transform: rotate(-15deg);
+}
+
+.sparkle {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: #ff66ff;
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  animation: sparkle 1.5s infinite;
+}
+
+.sparkle-1 { top: -10px; right: -5px; animation-delay: 0s; }
+.sparkle-2 { top: 10px; right: -15px; animation-delay: 0.3s; }
+.sparkle-3 { bottom: -5px; left: -10px; animation-delay: 0.6s; }
+.sparkle-4 { bottom: 15px; left: -5px; animation-delay: 0.9s; }
